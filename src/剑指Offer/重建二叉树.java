@@ -11,6 +11,31 @@ import java.util.logging.Level;
  */
 public class 重建二叉树 {
 
+
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || inorder == null) {
+            return null;
+        }
+        if (preorder.length == 0 || inorder.length == 0) {
+            return null;
+        }
+        if (preorder.length != inorder.length) {
+            return null;
+        }
+        TreeNode node = new TreeNode(preorder[0]);
+        int len = 0;
+        for (int i = 0; i < preorder.length; i++) {
+            if (inorder[i] == preorder[0]) {
+                len = i;
+                break;
+            }
+        }
+        node.left = buildTree(Arrays.copyOfRange(preorder, 1, len + 1), Arrays.copyOfRange(inorder, 0, len));
+        node.right = buildTree(Arrays.copyOfRange(preorder, len + 1, preorder.length), Arrays.copyOfRange(inorder, len + 1, preorder.length));
+        return node;
+    }
+
+
     public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
         if (pre == null || in == null) {
             return null;

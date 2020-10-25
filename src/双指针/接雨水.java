@@ -1,6 +1,35 @@
-package 数组;
+package 双指针;
 
 public class 接雨水 {
+
+    public static void main(String[] args) {
+        System.out.println(trap3(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+    }
+
+    public static int trap3(int[] height) {
+        int res = 0;
+        int leftMax = 0, rightMax = 0;
+        int left = 0, right = height.length - 1;
+        while (left < right) {
+            if (height[left] < height[right]) {
+                if (height[left] > leftMax) {
+                    leftMax = height[left];
+                } else {
+                    res += leftMax - height[left];
+                }
+                left++;
+            } else {
+                if (height[right] > rightMax) {
+                    rightMax = height[right];
+                } else {
+                    res += rightMax - height[right];
+                }
+                right--;
+            }
+        }
+        return res;
+    }
+
     /**
      * 一层层判断，判断后，将非0数字的全部-1
      * 当一层中非0数字小于2时则break
@@ -40,7 +69,7 @@ public class 接雨水 {
         int left = 0, right = height.length - 1;
         while (left <= right) {
             if (leftMax < rightMax) {
-                if (leftMax - height[left] > 0) {
+                if (leftMax > height[left]) {
                     res += leftMax - height[left];
                 } else {
                     leftMax = height[left];

@@ -1,48 +1,44 @@
-import util.ListNode;
-import util.TreeNode;
-
-import java.util.*;
-
 /**
  * @author zhoudawang
  */
 public class Test {
-
-    private TreeNode res;
-
     public static void main(String[] args) {
-        Test test = new Test();
-
-        TreeNode root = new TreeNode(3);
-        root.left = new TreeNode(9);
-        root.right = new TreeNode(20);
-        root.right.left = new TreeNode(15);
-        root.right.right = new TreeNode(7);
-
-        test.flatten(root);
+        Person a = new Person();
+        test(a);
+        System.out.println(a);
     }
 
-    public void flatten(TreeNode root) {
-        res = new TreeNode(root.val);
-        TreeNode ans = res;
-        DFS(root);
+    public static void test(Person b) {
+        b = new Person();
+        b.setName("zhou");
+        b.setAge(20);
+    }
+}
+class Person {
+    private String name;
+    private int age;
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
     }
 
-    public void DFS(TreeNode node) {
-        if (node.left != null) {
-            res.right = new TreeNode(node.left.val);
-            res = res.right;
-        } else {
-            return;
-        }
-        DFS(node.left);
+    public String getName() {
+        return name;
+    }
 
-        if (node.right != null) {
-            res.right = new TreeNode(node.right.val);
-            res = res.right;
-        } else {
-            return;
-        }
-        DFS(node.right);
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }

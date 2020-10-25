@@ -22,6 +22,7 @@ public class 乘积最大子数组 {
             return 0;
         }
         int[][] dp = new int[len][2];
+        // 由于存在负数，那么会导致最大的变最小的，最小的变最大的。因此还需要维护当前最小值imin
         dp[0][0] = nums[0];
         dp[0][1] = nums[0];
         for (int i = 1; i < len; i++) {

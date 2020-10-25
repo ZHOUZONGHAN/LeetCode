@@ -1,6 +1,23 @@
-package 数组;
+package 双指针;
 
 public class 盛最多水的容器 {
+
+    public static int maxArea2(int[] height) {
+        int max = 0;
+        int i = 0, j = height.length - 1;
+
+        while (i < j) {
+            int low = Math.min(height[i], height[j]);
+            max = Math.max(max, (j - i) * low);
+            if (height[i] < height[j]) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+
+        return max;
+    }
 
     public static int maxArea(int[] height) {
         int max = 0;
